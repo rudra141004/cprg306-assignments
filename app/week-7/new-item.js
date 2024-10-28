@@ -1,49 +1,34 @@
 "use client";
-
 import { useState } from "react";
 
-export default function NewItem() {
+export default function NewItem({ onAddItem }) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [category, setCategory] = useState("produce");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const item = {
+      id: Math.random().toString(36).substr(2, 9),
       name,
       quantity,
       category,
     };
-
-    console.log(item);
-
-    alert(`Item: ${name}, Quantity: ${quantity}, Category: ${category}`);
-
+    onAddItem(item);
     setName("");
     setQuantity(1);
     setCategory("produce");
   };
 
-  const increment = () => {
-    if (quantity < 20) {
-      setQuantity(quantity + 1);
-    }
-  };
-
-  const decrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+  const increment = () => setQuantity((prev) => Math.min(prev + 1, 20));
+  const decrement = () => setQuantity((prev) => Math.max(prev - 1, 1));
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
+   
       <form
         onSubmit={handleSubmit}
         className="bg-blue-950 rounded-lg p-6 shadow-md space-y-4 w-[300px]"
       >
-        {/* Name Field */}
         <div>
           <input
             type="text"
@@ -55,16 +40,13 @@ export default function NewItem() {
           />
         </div>
 
-        {/* Quantity Field */}
         <div className="flex items-center space-x-4">
           <button
             type="button"
             onClick={decrement}
             disabled={quantity === 1}
             className={`px-4 py-2 rounded-full ${
-              quantity === 1
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-gray-300 text-gray-900"
+              quantity === 1 ? "bg-gray-500 cursor-not-allowed" : "bg-gray-300 text-gray-900"
             }`}
           >
             −
@@ -75,16 +57,13 @@ export default function NewItem() {
             onClick={increment}
             disabled={quantity === 20}
             className={`px-4 py-2 rounded-full ${
-              quantity === 20
-                ? "bg-gray-500 cursor-not-allowed"
-                : "bg-blue-500 text-white"
+              quantity === 20 ? "bg-gray-500 cursor-not-allowed" : "bg-blue-500 text-white"
             }`}
           >
             +
           </button>
         </div>
 
-        {/* Category Field */}
         <div>
           <select
             value={category}
@@ -105,14 +84,10 @@ export default function NewItem() {
           </select>
         </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full py-2 bg-blue-500 text-white rounded-lg"
-        >
+        <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded-lg">
           Add Item
         </button>
       </form>
-    </div>
+    
   );
 }
