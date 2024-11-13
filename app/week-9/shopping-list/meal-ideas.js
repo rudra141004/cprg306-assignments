@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import Image from 'next/image';
 export default function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
 
@@ -44,7 +44,7 @@ export default function MealIdeas({ ingredient }) {
         <ul>
           {meals.map((meal) => (
             <li key={meal.idMeal} className="mb-4">
-              <img src={meal.strMealThumb} alt={meal.strMeal} className="w-16 h-16 rounded-full mb-2" />
+              <Image src={meal.strMealThumb} alt={meal.strMeal} className="w-16 h-16 rounded-full mb-2" />
               <p>{meal.strMeal}</p>
             </li>
           ))}

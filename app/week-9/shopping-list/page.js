@@ -10,6 +10,8 @@ import { useUserAuth } from "../_utils/auth-context";
 export default function Page() {
 
   const { user } = useUserAuth();
+  const [items, setItems] = useState(itemsData);
+  const [selectedItemName, setSelectedItemName] = useState("");
 
   if (!user) {
     return (
@@ -20,8 +22,7 @@ export default function Page() {
     );
   }
   
-  const [items, setItems] = useState(itemsData);
-  const [selectedItemName, setSelectedItemName] = useState("");
+  
 
   const handleAddItem = (item) => {
     setItems((prevItems) => [...prevItems, item]);
