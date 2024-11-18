@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from 'next/image';
+
 export default function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
 
@@ -33,24 +34,30 @@ export default function MealIdeas({ ingredient }) {
 
   return (
     <div>
-    <h2 className="text-2xl font-bold mb-4">Meal Ideas</h2>
-    {!ingredient ? (
-      <p className="text-white">Select an item to see meal ideas</p>
-    )  : meals.length === 0 ? (
-      <p className="text-white">No meal ideas found for {ingredient}</p>
-    ) : (
-      <div>
-        <p className="text-white mb-4">Here are some meal ideas using {ingredient}:</p>
-        <ul>
-          {meals.map((meal) => (
-            <li key={meal.idMeal} className="mb-4">
-              <Image src={meal.strMealThumb} alt={meal.strMeal} className="w-16 h-16 rounded-full mb-2" />
-              <p>{meal.strMeal}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
+      <h2 className="text-2xl font-bold mb-4">Meal Ideas</h2>
+      {!ingredient ? (
+        <p className="text-white">Select an item to see meal ideas</p>
+      )  : meals.length === 0 ? (
+        <p className="text-white">No meal ideas found for {ingredient}</p>
+      ) : (
+        <div>
+          <p className="text-white mb-4">Here are some meal ideas using {ingredient}:</p>
+          <ul>
+            {meals.map((meal) => (
+              <li key={meal.idMeal} className="mb-4">
+                <Image
+                  src={meal.strMealThumb}
+                  alt={meal.strMeal}
+                  width={64}   // 16 * 4 (since 16px is the width in Tailwind)
+                  height={64}  // 16 * 4 (same for height)
+                  className="w-16 h-16 rounded-full mb-2"
+                />
+                <p>{meal.strMeal}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }

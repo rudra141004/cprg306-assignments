@@ -71,6 +71,14 @@ export default function Page() {
             Week 9
           </Link>
         </li>
+        <li>
+          <Link
+            href="\week-10"
+            className="text-xl text-gray-300 hover:text-purple-400 transition-colors duration-200 transform hover:scale-105"
+          >
+            Week 10
+          </Link>
+        </li>
       </ul>
     </main>
   );
